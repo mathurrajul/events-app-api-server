@@ -10,8 +10,8 @@
 //      cluster-1 
 //      us-central1-c
 //      the following values can be found in the yaml:
-//      [DEPLOYMENT_NAME]
-//      [CONTAINER_NAME] (name of the container to be replaced - in the template/spec section of the deployment)
+//      demo-api
+//      demo-api (name of the container to be replaced - in the template/spec section of the deployment)
 
 
 pipeline {
@@ -73,7 +73,7 @@ pipeline {
                 echo 'Get cluster credentials'
                 sh 'gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project dtc-102021-u602'
                 echo "Update the image to use gcr.io/dtc-102021-u602/api-server-image:v2.${env.BUILD_ID}"
-                sh "kubectl set image deployment/[DEPLOYMENT_NAME] [CONTAINER_NAME]=gcr.io/dtc-102021-u602/api-server-image:v2.${env.BUILD_ID} --record"
+                sh "kubectl set image deployment/demo-api demo-api=gcr.io/dtc-102021-u602/api-server-image:v2.${env.BUILD_ID} --record"
             }
         }            
     }
